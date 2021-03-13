@@ -1,0 +1,1 @@
+This text has been loaded from sample resources: "${BEE_RESOURCES}/sample/greeting.txt"
