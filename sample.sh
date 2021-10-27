@@ -2,7 +2,9 @@
 
 sample::_new() {
   echo '# sample'
-  echo 'SAMPLE_GREETING="Hello from sample"'
+  echo 'SAMPLE_GREETING="Hello from sample"
+# secrets:
+# SAMPLE_SECRET'
 }
 
 # Uncomment if this plugin should react to signals
@@ -24,7 +26,9 @@ sample::_new() {
 
 sample::greeting() {
   echo "${SAMPLE_GREETING} (1.0.0)"
-  local greeting="${BEE_RESOURCES}/sample/greeting.txt"
+  local greeting="${BEE_RESOURCES}/sample/greeting.txt" sample_secret
+  sample_secret="$(bee::secrets sample.secret)"
   assert_file greeting
   cat "${greeting}"
+  echo "${sample_secret}"
 }
