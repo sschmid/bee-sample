@@ -1,10 +1,31 @@
-#!/usr/bin/env bash
+sample::help() {
+  cat << 'EOF'
+A template for bee plugins - https://github.com/sschmid/bee-sample
 
-sample::_new() {
-  echo '# sample'
-  echo 'SAMPLE_GREETING="Hello from sample"
-# secrets:
-# SAMPLE_SECRET'
+This plugin comes with additional resources.
+Please run 'bee res sample' to copy all required files to your project.
+
+template:
+
+  SAMPLE_GREETING="Hello from sample"
+
+secrets:
+
+  SAMPLE_SECRET
+
+usage:
+
+  greeting   print greetings
+
+bee dependencies:
+
+  pluginname
+
+dependencies:
+
+  name   https://url.com
+
+EOF
 }
 
 # Uncomment if this plugin should react to signals
@@ -20,15 +41,21 @@ sample::_new() {
 #   echo "sample EXIT"
 # }
 
-# BEE_INT_TRAPS+=(sample_int)
-# BEE_TERM_TRAPS+=(sample_term)
-# BEE_EXIT_TRAPS+=(sample_exit)
+# bee::add_int_trap sample_int
+# bee::add_term_trap sample_term
+# bee::add_exit_trap sample_exit
+
+# bee::remove_int_trap sample_int
+# bee::remove_term_trap sample_term
+# bee::remove_exit_trap sample_exit
 
 sample::greeting() {
-  echo "${SAMPLE_GREETING} (1.0.0)"
-  local greeting="${BEE_RESOURCES}/sample/greeting.txt" sample_secret
-  sample_secret="$(bee::secrets sample.secret)"
-  assert_file greeting
+  echo "${SAMPLE_GREETING}"
+  local greeting="${BEE_RESOURCES}/sample/greeting.txt"
+  if [[ ! -f "${greeting}" ]]; then
+    bee::log_error "${greeting} not found!"
+    exit 1
+  fi
   cat "${greeting}"
-  echo "${sample_secret}"
+  echo "${SAMPLE_SECRET}"
 }
