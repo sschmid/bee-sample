@@ -1,7 +1,5 @@
 sample::help() {
   cat << 'EOF'
-A template for bee plugins - https://github.com/sschmid/bee-sample
-
 This plugin comes with additional resources.
 Please run 'bee res sample' to copy all required files to your project.
 
@@ -16,14 +14,6 @@ secrets:
 usage:
 
   greeting   print greetings
-
-bee dependencies:
-
-  pluginname
-
-dependencies:
-
-  name   https://url.com
 
 EOF
 }

@@ -1,18 +1,21 @@
 # sample
-A template for bee plugins - https://github.com/sschmid/bee
+A template for bee plugins
 
+https://github.com/sschmid/bee-sample
+
+```
 This plugin comes with additional resources.
-Please run `bee res sample` to copy all required files to your project.
+Please run 'bee res sample' to copy all required files to your project.
 
-## `sample::greeting`
-Greetings
+template:
 
-----------------------------------------
+  SAMPLE_GREETING="Hello from sample"
 
-## Dependencies
+secrets:
 
-### bee
-- `pluginname`
+  SAMPLE_SECRET
 
-### 3rd party
-- `name` - https://url.com
+usage:
+
+  greeting   print greetings
+```
